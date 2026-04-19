@@ -9,8 +9,11 @@ import { FoodListing } from '@/types';
 import { MapPin, Calendar, User, Search, Filter, Image } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import FoodDetailModal from '@/components/FoodDetailModal';
-import GoogleMapView from '@/components/GoogleMapView';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import MapComponent from '@/components/MapComponent';
+import './App.css';
+
+export default App;
 
 const Feed = () => {
   const [listings, setListings] = useState<FoodListing[]>([]);
@@ -213,7 +216,7 @@ const Feed = () => {
           <Tabs defaultValue="list" className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-6">
               <TabsTrigger value="list">Vista Lista</TabsTrigger>
-              <TabsTrigger value="google-map">Mapa Interactivo</TabsTrigger>
+              <TabsTrigger value="map-view">Mapa Interactivo</TabsTrigger>
             </TabsList>
 
             <TabsContent value="list" className="space-y-6">
@@ -362,14 +365,8 @@ const Feed = () => {
               )}
             </TabsContent>
 
-            <TabsContent value="google-map">
-              <GoogleMapView 
-                listings={filteredListings} 
-                onListingSelect={(listing) => {
-                  setSelectedListing(listing);
-                  setIsModalOpen(true);
-                }}
-              />
+            <TabsContent value="map-view">
+              <MapComponent />
             </TabsContent>
           </Tabs>
         </div>

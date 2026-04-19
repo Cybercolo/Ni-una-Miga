@@ -40,3 +40,8 @@
 .read-the-docs {
   color: #888;
 }
+
+.map-container {
+  height: 400px; /* Or 100vh for full screen */
+  width: 100%;
+}

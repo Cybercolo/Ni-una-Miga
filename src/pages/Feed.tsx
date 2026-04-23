@@ -210,9 +210,17 @@ const Feed = () => {
       <div className="min-h-screen bg-gradient-to-b from-green-50 to-yellow-50 py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-green-800 mb-2">Comida Disponible</h1>
-            <p className="text-gray-600">Descubre comida cerca de ti y ayuda a reducir el desperdicio</p>
+          <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="text-center md:text-left">
+              <h1 className="text-3xl font-bold text-green-800 mb-2">Comida Disponible</h1>
+              <p className="text-gray-600">Descubre comida cerca de ti y ayuda a reducir el desperdicio</p>
+            </div>
+            <Button
+              onClick={() => navigate('/publicar')}
+              className="h-auto min-h-14 rounded-xl bg-green-600 px-8 py-4 text-base font-semibold shadow-md hover:bg-green-700"
+            >
+              Publicar Comida Aqui
+            </Button>
           </div>
 
           {/* Tabs for List/Map view */}

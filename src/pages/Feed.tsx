@@ -6,14 +6,11 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useAuth } from '@/contexts/AuthContext';
 import { FoodListing } from '@/types';
-import { MapPin, Calendar, User, Search, Filter, Image } from 'lucide-react';
+import { MapPin, Calendar, User, Search, Filter } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import FoodDetailModal from '@/components/FoodDetailModal';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import MapComponent from '@/components/MapComponent';
-import './App.css';
-
-export default App;
 
 const Feed = () => {
   const [listings, setListings] = useState<FoodListing[]>([]);
@@ -119,6 +116,12 @@ const Feed = () => {
     if (categoryFilter && categoryFilter !== 'all') {
       filtered = filtered.filter(listing => listing.category === categoryFilter);
     }
+
+    filtered.sort((a, b) => {
+      const firstDate = new Date(a.createdAt).getTime();
+      const secondDate = new Date(b.createdAt).getTime();
+      return secondDate - firstDate;
+    });
 
     setFilteredListings(filtered);
   }, [listings, searchTerm, categoryFilter, user?.id]);
@@ -366,7 +369,10 @@ const Feed = () => {
             </TabsContent>
 
             <TabsContent value="map-view">
-              <MapComponent />
+              <MapComponent
+                listings={filteredListings}
+                onListingSelect={handleInterested}
+              />
             </TabsContent>
           </Tabs>
         </div>
